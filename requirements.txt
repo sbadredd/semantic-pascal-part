@@ -1,0 +1,9 @@
+tqdm
+# For image processing and feature generation
+opencv-python~=4.6.0
+torch~=1.12
+torchvision~=0.13
+detectron2  # The code was developed with this 
+            # commit: https://github.com/facebookresearch/detectron2/commit/0703e08a5f589f7503a3fbfce41309c80204eec8
+# For postprocessing to HDF5
+h5py~=3.7
