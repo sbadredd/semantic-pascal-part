@@ -5,6 +5,8 @@ The Semantic Pascal-Part Feature Generation code generates feature vectors for e
 ## Task Description
 Semantic Pascal-Part is introduced by [Donadello et al., 2017](https://arxiv.org/abs/1705.08968) for a classification task that involves training two neural models. The first model predicts the type of an object within a bounding box `x`, using a multi-class, single-label classifier. This model allows us to answer questions such as `isbottle(x)`, `iscap(x)`, etc. The second model is a binary relation predictor that can determine if one bounding box `x` is a part of another bounding box `y`, using the `ispartof(x,y)` predicate.
 
+<img src="https://user-images.githubusercontent.com/43364643/231712308-c7246ede-5529-4267-9069-44e9b104ed5b.png" width="400">
+
 In addition to learning via groundtruth examples (as usual in Machine Learning), the learning process can also use a set of mereological constraints that relate to the types and their meanings. These constraints can be used to reason about relationships between objects and their parts. For example:
 ```css
 forall x,y ((isbottle(x) AND ispartof(y,x)) -> (iscap(y) OR isbody(x)))
@@ -123,8 +125,6 @@ class Box:
 box_data: list[Box] = []
 
 with h5py.File("box_features.hdf5", "r") as f:
-    all_box_ids = list(f.keys())
-    
     for box_id in tqdm.tqdm(all_box_ids, desc="Reading box ids"):
         box_data.append(
             Box(id_=box_id,
