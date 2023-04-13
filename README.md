@@ -1,6 +1,6 @@
 # Semantic Pascal-Part Feature Generation
 
-The Semantic Pascal-Part Feature Generation code generates feature vectors for each bounding box in the [Semantic PASCAL-Part](https://github.com/ivanDonadello/semantic-PASCAL-Part) neuro-symbolic dataset. These feature vectors are the result of the Region of Interest embedding by the FasterRCNN architecture as described in [Ren et al., 2017](https://arxiv.org/abs/1506.01497).
+The Semantic Pascal-Part Feature Generation code generates feature vectors for each bounding box in the [Semantic PASCAL-Part](https://github.com/ivanDonadello/semantic-PASCAL-Part) neuro-symbolic dataset. These feature vectors are the result of the Region of Interest embedding by a FasterRCNN architecture.
 
 ## Task Description
 Semantic Pascal-Part is introduced by [Donadello et al., 2017](https://arxiv.org/abs/1705.08968) for a classification task that involves training two neural models. The first model predicts the type of an object within a bounding box `x`, using a multi-class, single-label classifier. This model allows us to answer questions such as `isbottle(x)`, `iscap(x)`, etc. The second model is a binary relation predictor that can determine if one bounding box `x` is a part of another bounding box `y`, using the `ispartof(x,y)` predicate.
@@ -19,7 +19,7 @@ Overall, Semantic Pascal-Part is a valuable dataset for exploring the use of log
 
 ## Motivation for the New Feature Set
 
-Previous works featurized the bounding boxes using the object class predictions produced by an object detector trained on the PASCAL-Part dataset [[Donadello et al., 2017](https://arxiv.org/abs/1705.08968); [van Krieken et al., 2019](https://arxiv.org/abs/1908.04700)]. However, this meant that the NeSy model only corrected the predictions of the detector. To increase the difficulty of the task, we generate the feature vectors using latent vectors of 1024 features, which are produced by intermediate layers of a pre-trained FasterRCNN model (specifically, the backbone + ROIPooler + box head). This means that the NeSy model must learn the final layers of the object classifier as well.
+Previous works featurized the bounding boxes using the object class predictions produced by an object detector trained on the PASCAL-Part dataset [[Donadello et al., 2017](https://arxiv.org/abs/1705.08968); [van Krieken et al., 2019](https://arxiv.org/abs/1908.04700)]. However, this meant that the NeSy model only corrected the predictions of the detector. To increase the difficulty of the task, we generate the feature vectors using latent vectors of 1024 features, which are produced by intermediate layers of a pre-trained FasterRCNN model (specifically, the backbone + ROIPooler + box head as described in [Ren et al., 2017](https://arxiv.org/abs/1506.01497)). This means that the NeSy model must learn the final layers of the object classifier as well.
 
 For those interested in an object detector architecture trained end-to-end without any pre-training, please refer to [Manigrasso et al., 2021](https://arxiv.org/abs/2107.01877).
 
